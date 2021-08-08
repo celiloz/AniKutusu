@@ -1,23 +1,25 @@
-import express from 'express'
-import mongoose from 'mongoose'
-import cors from 'cors'
-import dotenv from 'dotenv'
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
 
-import memoryRouter from './routers/memoryRouter.js'
+import memoryRouter from "./routers/memoryRouter.js";
 
 dotenv.config();
 
-const app = express()
+const app = express();
 
-app.use(express.json( { limit: '20mb' } ))
+app.use(express.json({ limit: "20mb" }));
 
-app.use('/memories', memoryRouter)
+app.use("/memories", memoryRouter);
 
-app.listen(process.env.PORT,()=>{
-    mongoose.connect(process.env.MONGO_URI,{
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: true,
-    }).then(()=> console.log('connected to db'))
-      .catch((err)=>console.log(err))
-})
+app.listen(process.env.PORT, () => {
+  mongoose
+    .connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: true,
+    })
+    .then(() => console.log("connected to db"))
+    .catch((err) => console.log(err));
+});
